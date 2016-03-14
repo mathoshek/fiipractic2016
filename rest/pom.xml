@@ -8,7 +8,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 	
-	<name>Employee Resume Project storage module</name>
+	<name>Agenda Project storage module</name>
 	<artifactId>rest</artifactId>
 	<packaging>war</packaging>
 
