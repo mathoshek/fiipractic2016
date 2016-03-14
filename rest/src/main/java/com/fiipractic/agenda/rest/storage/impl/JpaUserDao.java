@@ -42,7 +42,7 @@ public class JpaUserDao implements UserDao {
 
     @Override
     public User getByUsername(String username) {
-        TypedQuery<User> q = entityManager.createQuery("select u from User u where username=:username", User.class);
+        TypedQuery<User> q = entityManager.createQuery("select u from User u where u.username=:username", User.class);
         q.setParameter("username", username);
 
         return q.getSingleResult();
