@@ -4,3 +4,13 @@
 /rest/target
 /web/web.iml
 /web/target
+/.settings
+/.project
+/rest/.settings
+/rest/target
+/rest/.classpath
+/rest/.project
+/web/.settings
+/web/target
+/web/.classpath
+/web/.project
