@@ -1,6 +1,9 @@
 package com.fiipractic.agenda.rest.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * File created by a.chmilevski on 3/14/2016 - 3:18 PM.
@@ -30,6 +33,10 @@ public class User {
     public Long getId() {
         return id;
     }
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user")
+    private Set<Contact> contacts;
 
     public void setId(Long id) {
         this.id = id;
@@ -65,5 +72,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(Set<Contact> contacts) {
+        this.contacts = contacts;
     }
 }
