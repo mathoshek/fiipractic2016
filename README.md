@@ -16,7 +16,7 @@
  6. In the certificates window, go to the Details tab
  7. Select Copy to File
  8. Save the certificate file on your disk. Close the certificate window.
- 9. Go to Chrome > Settings, search for SSL (chrome://settings/search#ssl) and click on Manage certificates
+09. Go to Chrome > Settings, search for SSL (chrome://settings/search#ssl) and click on Manage certificates
 10. Go to the "Trusted Root Certification Authorities" tab and click on import
 11. Select the file you saved on your disk in step 8.
 12. Finish the import.
