@@ -7,7 +7,7 @@ import javax.persistence.*;
  * RadiON
  */
 @Entity
-@Table(name="user_")
+@Table(name="users")
 public class User {
 
     @Id
@@ -15,7 +15,7 @@ public class User {
     @Column
     private Long id;
 
-    @Column
+    @Column(unique=true)
     private String username;
 
     @Column
