@@ -7,7 +7,7 @@ import javax.persistence.*;
  * RadiON
  */
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class User {
 
     @Id
@@ -15,11 +15,14 @@ public class User {
     @Column
     private Long id;
 
-    @Column(unique=true)
+    @Column(unique = true, nullable = false)
     private String username;
 
-    @Column
+    @Column(nullable = false)
     private String password;
+
+    @Column(nullable = false)
+    private boolean enabled = true;
 
     @Column
     private String email;
@@ -46,6 +49,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getEmail() {

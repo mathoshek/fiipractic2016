@@ -4,6 +4,7 @@ import com.fiipractic.agenda.rest.models.User;
 import com.fiipractic.agenda.rest.services.UserService;
 import com.fiipractic.agenda.rest.storage.UserDao;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -19,6 +20,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Override
     public List<User> getAllUsers() {
         return userDao.findAll();
@@ -32,6 +36,8 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User createUser(User user) {
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
         userDao.add(user);
 
         return user;
@@ -42,6 +48,7 @@ public class UserServiceImpl implements UserService {
     public User updateUser(String username, User user) {
         User localUser = userDao.getByUsername(username);
         user.setId(localUser.getId());
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         return userDao.update(user);
     }
 
