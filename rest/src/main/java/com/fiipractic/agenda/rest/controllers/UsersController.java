@@ -23,7 +23,7 @@ public class UsersController {
         return userService.getAllUsers();
     }
 
-    @RequestMapping(method = RequestMethod.GET, path = "/{username}")
+    @RequestMapping(method = RequestMethod.GET, path = "/{username:.+}")
     public User getUser(@PathVariable String username){
         return userService.getUserByUsername(username);
     }
@@ -33,12 +33,12 @@ public class UsersController {
         return userService.createUser(user);
     }
 
-    @RequestMapping(method=RequestMethod.PUT, path = "/{username}")
+    @RequestMapping(method=RequestMethod.PUT, path = "/{username:.+}")
     public User updateUser(@PathVariable String username, @RequestBody User user){
         return userService.updateUser(username, user);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE, path = "/{username}")
+    @RequestMapping(method = RequestMethod.DELETE, path = "/{username:.+}")
     public void deleteUser(@PathVariable String username){
         userService.deleteUser(username);
     }
