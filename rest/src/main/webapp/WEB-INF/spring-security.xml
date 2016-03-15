@@ -12,7 +12,7 @@
     </bean>
 
     <security:http>
-        <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')"/>
+        <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" requires-channel="https"/>
         <security:http-basic/>
         <security:csrf disabled="true"/>
     </security:http>
