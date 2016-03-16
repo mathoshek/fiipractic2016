@@ -1,16 +1,17 @@
 package com.fiipractic.agenda.rest.services.impl;
 
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import com.fiipractic.agenda.rest.models.Contact;
 import com.fiipractic.agenda.rest.models.User;
 import com.fiipractic.agenda.rest.services.ContactService;
 import com.fiipractic.agenda.rest.storage.ContactDao;
 import com.fiipractic.agenda.rest.storage.UserDao;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.AccessDeniedException;
-import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.List;
 
 /**
  * File created by a.chmilevski on 3/15/2016 - 1:14 PM.

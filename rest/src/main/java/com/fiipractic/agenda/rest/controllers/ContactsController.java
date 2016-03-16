@@ -1,14 +1,18 @@
 package com.fiipractic.agenda.rest.controllers;
 
-import com.fiipractic.agenda.rest.models.Contact;
-import com.fiipractic.agenda.rest.models.User;
-import com.fiipractic.agenda.rest.services.ContactService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.fiipractic.agenda.rest.models.Contact;
+import com.fiipractic.agenda.rest.services.ContactService;
 
 /**
  * File created by a.chmilevski on 3/15/2016 - 1:13 PM.

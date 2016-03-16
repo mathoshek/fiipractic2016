@@ -1,29 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:security="http://www.springframework.org/schema/security"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/security
        http://www.springframework.org/schema/security/spring-security.xsd">
 
-    <bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
-        <constructor-arg name="strength" value="12"/>
-    </bean>
+	<bean id="bCryptPasswordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+		<constructor-arg name="strength" value="12" />
+	</bean>
 
-    <security:http>
-        <security:intercept-url pattern="/**" access="hasRole('ROLE_USER')" requires-channel="https"/>
-        <security:http-basic/>
-        <security:csrf disabled="true"/>
-    </security:http>
+	<security:http>
+		<security:intercept-url pattern="/users"
+			method="POST" access="permitAll" requires-channel="https" />
+		<security:intercept-url pattern="/**"
+			access="hasRole('ROLE_USER')" requires-channel="https" />
+		<security:http-basic />
+		<security:csrf disabled="true" />
+	</security:http>
 
-    <security:authentication-manager>
-        <security:authentication-provider>
-            <security:jdbc-user-service data-source-ref="dataSource"
-                                        users-by-username-query="SELECT username,password,enabled FROM users WHERE username=?"
-                                        authorities-by-username-query="SELECT username,role FROM user_roles WHERE username=?"/>
-            <security:password-encoder ref="bCryptPasswordEncoder">
-            </security:password-encoder>
-        </security:authentication-provider>
-    </security:authentication-manager>
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:jdbc-user-service
+				data-source-ref="dataSource"
+				users-by-username-query="SELECT username,password,enabled FROM users WHERE username=?"
+				authorities-by-username-query="SELECT u.username,r.role FROM user_roles r, users u WHERE r.user_id = u.id and u.username=?" />
+			<security:password-encoder ref="bCryptPasswordEncoder">
+			</security:password-encoder>
+		</security:authentication-provider>
+	</security:authentication-manager>
 </beans>
