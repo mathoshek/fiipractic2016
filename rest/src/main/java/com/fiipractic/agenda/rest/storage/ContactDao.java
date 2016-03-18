@@ -5,8 +5,7 @@ import com.fiipractic.agenda.rest.models.Contact;
 import java.util.List;
 
 /**
- * File created by a.chmilevski on 3/15/2016 - 1:15 PM.
- * RadiON
+ * File created by a.chmilevski on 3/15/2016 - 1:15 PM. RadiON
  */
 public interface ContactDao {
     Contact getById(Long contactId);
@@ -14,4 +13,8 @@ public interface ContactDao {
     List<Contact> getForUsername(String username);
 
     void add(Contact contact);
+
+    Contact update(Contact contact);
+
+    void delete(Contact contact);
 }

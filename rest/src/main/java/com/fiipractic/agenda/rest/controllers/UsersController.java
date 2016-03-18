@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * File created by a.chmilevski on 3/14/2016 - 3:17 PM.
- * RadiON
+ * File created by a.chmilevski on 3/14/2016 - 3:17 PM. RadiON
  */
 @RestController
 @RequestMapping("/users")
@@ -19,6 +18,7 @@ public class UsersController {
     @Autowired
     private UserService userService;
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.GET)
     public List<User> getUsers() {
         return userService.getAllUsers();
@@ -35,11 +35,13 @@ public class UsersController {
         return userService.createUser(user);
     }
 
+    @PreAuthorize("authentication.name == #username || hasRole('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.PUT, path = "/{username:.+}")
     public User updateUser(@PathVariable String username, @RequestBody User user) {
         return userService.updateUser(username, user);
     }
 
+    @PreAuthorize("authentication.name == #username || hasRole('ROLE_ADMIN')")
     @RequestMapping(method = RequestMethod.DELETE, path = "/{username:.+}")
     public void deleteUser(@PathVariable String username) {
         userService.deleteUser(username);

@@ -7,14 +7,24 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+
 import java.util.List;
 
 /**
- * File created by a.chmilevski on 3/15/2016 - 1:15 PM.
- * RadiON
+ * File created by a.chmilevski on 3/15/2016 - 1:15 PM. RadiON
  */
 @Repository
 public class JpaContactDao implements ContactDao {
+
+    @Override
+    public Contact update(Contact contact) {
+        return entityManager.merge(contact);
+    }
+
+    @Override
+    public void delete(Contact contact) {
+        entityManager.remove(contact);
+    }
 
     @PersistenceContext
     private EntityManager entityManager;
@@ -26,7 +36,8 @@ public class JpaContactDao implements ContactDao {
 
     @Override
     public List<Contact> getForUsername(String username) {
-        TypedQuery<Contact> q = entityManager.createQuery("select c from Contact c where c.user.username=:username", Contact.class);
+        TypedQuery<Contact> q = entityManager.createQuery("select c from Contact c where c.user.username=:username",
+                Contact.class);
         q.setParameter("username", username);
 
         return q.getResultList();

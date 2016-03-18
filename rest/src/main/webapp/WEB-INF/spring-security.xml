@@ -13,9 +13,9 @@
 
 	<security:http>
 		<security:intercept-url pattern="/users"
-			method="POST" access="permitAll" requires-channel="https" />
+			method="POST" access="permitAll"/>
 		<security:intercept-url pattern="/**"
-			access="hasRole('ROLE_USER')" requires-channel="https" />
+			access="hasRole('ROLE_USER')" />
 		<security:http-basic />
 		<security:csrf disabled="true" />
 	</security:http>
