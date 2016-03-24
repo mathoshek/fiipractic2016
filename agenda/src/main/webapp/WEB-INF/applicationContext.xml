@@ -27,7 +27,7 @@
 		<property name="persistenceUnitName" value="myPersistenceUnit" />
 		<property name="persistenceProviderClass"
 			value="org.hibernate.jpa.HibernatePersistenceProvider" />
-		<property name="packagesToScan" value="com.fii.practic.agenda.rest.models" />
+		<property name="packagesToScan" value="com.fiipractic.agenda.rest.models" />
 		<property name="jpaProperties">
 			<props>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
