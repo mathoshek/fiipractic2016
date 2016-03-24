@@ -1,17 +1,15 @@
-package com.fiipractic.agenda.rest.storage.impl;
+package com.fiipractic.agenda.rest.storage.impl.inmemory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Repository;
-
 import com.fiipractic.agenda.rest.models.Contact;
 import com.fiipractic.agenda.rest.models.User;
 import com.fiipractic.agenda.rest.storage.ContactDao;
 
-@Repository
+//@Repository
 public class InMemoryContactDao implements ContactDao {
 
     private static Map<String, Map<Long, Contact>> contacts = new HashMap<>();
@@ -59,13 +57,14 @@ public class InMemoryContactDao implements ContactDao {
     }
 
     @Override
-    public void update(Contact contact) {
+    public Contact update(Contact contact) {
         User user = contact.getUser();
         Map<Long, Contact> currentUserContacts = contacts.get(user.getUsername());
         if (currentUserContacts != null && currentUserContacts.containsKey(contact.getId())) {
 
             currentUserContacts.put(contact.getId(), contact);
         }
+        return contact;
     }
 
     @Override

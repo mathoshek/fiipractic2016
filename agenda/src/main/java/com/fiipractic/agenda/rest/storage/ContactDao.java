@@ -12,7 +12,7 @@ public interface ContactDao {
 
     void add(Contact contact);
 
-    void update(Contact contact);
+    Contact update(Contact contact);
 
     void delete(Contact contact);
 

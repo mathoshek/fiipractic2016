@@ -1,16 +1,14 @@
-package com.fiipractic.agenda.rest.storage.impl;
+package com.fiipractic.agenda.rest.storage.impl.inmemory;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.stereotype.Repository;
-
 import com.fiipractic.agenda.rest.models.User;
 import com.fiipractic.agenda.rest.storage.UserDao;
 
-@Repository
+//@Repository
 public class InMemoryUserDao implements UserDao {
 
     private static Map<String, User> users = new HashMap<>();

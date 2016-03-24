@@ -27,18 +27,18 @@ public class ContactsController {
 
     @RequestMapping(method = RequestMethod.POST)
     public Contact createContact(@PathVariable String username, @RequestBody Contact contact) {
-        return contactService.createContact(username, contact);
+        return contactService.createContactForUsername(username, contact);
     }
 
     @RequestMapping(method = RequestMethod.PUT, path = "/{contactId}")
     public Contact updateContact(@PathVariable String username, @PathVariable Long contactId,
             @RequestBody Contact contact) {
-        return contactService.updateContact(username, contactId, contact);
+        return contactService.updateContactForUsername(username, contactId, contact);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, path = "/{contactId}")
     public void deleteContact(@PathVariable String username, @PathVariable Long contactId) {
-        contactService.deleteContact(username, contactId);
+        contactService.deleteContactForUsername(username, contactId);
     }
 
 }

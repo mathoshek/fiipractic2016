@@ -2,6 +2,8 @@ package com.fiipractic.agenda.rest.services.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +33,8 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public Contact createContact(String username, Contact contact) {
+    @Transactional
+    public Contact createContactForUsername(String username, Contact contact) {
         User user = userDao.getByUsername(username);
         contact.setUser(user);
         contactDao.add(contact);
@@ -39,20 +42,22 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public Contact updateContact(String username, Long contactId, Contact contact) {
+    @Transactional
+    public Contact updateContactForUsername(String username, Long contactId, Contact contact) {
         User user = userDao.getByUsername(username);
         Contact existingContact = contactDao.getById(username, contactId);
         if (existingContact == null) {
             throw new RuntimeException("Contact does not exist");
         }
-        contact.setId(contactId);
+        contact.setId(existingContact.getId());
         contact.setUser(user);
         contactDao.update(contact);
         return contact;
     }
 
     @Override
-    public void deleteContact(String username, Long contactId) {
+    @Transactional
+    public void deleteContactForUsername(String username, Long contactId) {
         Contact contact = contactDao.getById(username, contactId);
         contactDao.delete(contact);
     }

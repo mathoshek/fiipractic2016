@@ -10,9 +10,9 @@ public interface ContactService {
 
     Contact getContactForUsername(String username, Long contactId);
 
-    Contact createContact(String username, Contact contact);
+    Contact createContactForUsername(String username, Contact contact);
 
-    Contact updateContact(String username, Long contactId, Contact contact);
+    Contact updateContactForUsername(String username, Long contactId, Contact contact);
 
-    void deleteContact(String username, Long contactId);
+    void deleteContactForUsername(String username, Long contactId);
 }

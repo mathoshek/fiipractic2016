@@ -2,6 +2,8 @@ package com.fiipractic.agenda.rest.services.impl;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,12 +28,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public User createUser(User user) {
         userDao.add(user);
         return user;
     }
 
     @Override
+    @Transactional
     public User updateUser(String username, User user) {
         User existingUser = userDao.getByUsername(username);
         user.setId(existingUser.getId());
@@ -39,6 +43,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void deleteUser(String username) {
         User user = userDao.getByUsername(username);
         userDao.delete(user);

@@ -1,15 +1,30 @@
 package com.fiipractic.agenda.rest.models;
 
+import javax.persistence.*;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@Entity
+@Table(name = "contacts")
 public class Contact {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "name", nullable = false)
     private String name;
+
+    @Column(name = "phonenumber", nullable = false)
     private String phoneNumber;
+
+    @Column(name = "birthday")
     private String birthday;
 
     @JsonIgnore
+    @ManyToOne
+    @JoinColumn
     private User user;
 
     public Long getId() {
