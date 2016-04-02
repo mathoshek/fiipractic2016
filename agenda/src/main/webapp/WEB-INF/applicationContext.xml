@@ -8,6 +8,8 @@
 
 	<!-- loading properties file -->
 	<context:property-placeholder location="classpath*:db.properties" />
+	
+	<!-- package to be scanned by spring for business services and repository services -->
 	<context:component-scan
 		base-package="com.fiipractic.agenda.rest.services,com.fiipractic.agenda.rest.storage" />
 
