@@ -8,10 +8,21 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
-	<context:component-scan base-package="com.fiipractic.agenda.rest.controllers" />
-	<mvc:annotation-driven />
+	<security:http pattern="/**" create-session="stateless">
+		<security:intercept-url pattern="/**"
+			access="hasRole('ROLE_USER')" />
+		<security:http-basic />
+		<security:csrf disabled="true" />
+	</security:http>
 
-	<security:global-method-security
-		pre-post-annotations="enabled" />
+	<security:authentication-manager>
+		<security:authentication-provider>
+			<security:user-service>
+				<security:user name="albert" authorities="ROLE_USER"
+					password="test" />
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
 
 </beans>
