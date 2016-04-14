@@ -8,7 +8,10 @@
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 
+
 	<security:http pattern="/**" create-session="stateless">
+		<security:intercept-url pattern="/users"
+			method="POST" access="permitAll" />
 		<security:intercept-url pattern="/**"
 			access="hasRole('ROLE_USER')" />
 		<security:http-basic />
@@ -17,10 +20,12 @@
 
 	<security:authentication-manager>
 		<security:authentication-provider>
-			<security:user-service>
-				<security:user name="albert" authorities="ROLE_USER"
-					password="test" />
-			</security:user-service>
+			<!-- <security:user-service> <security:user name="albert" authorities="ROLE_USER" 
+				password="test" /> </security:user-service> -->
+			<security:jdbc-user-service
+				data-source-ref="dataSource"
+				users-by-username-query="select u.username, u.password, u.enabled from users u where u.username=?"
+				authorities-by-username-query="select u.username, r.role from users u, user_roles r where u.id=r.user_id and u.username=?" />
 		</security:authentication-provider>
 	</security:authentication-manager>
 

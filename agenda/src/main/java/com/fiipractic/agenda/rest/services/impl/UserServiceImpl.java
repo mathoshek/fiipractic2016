@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fiipractic.agenda.rest.models.User;
+import com.fiipractic.agenda.rest.models.UserRole;
 import com.fiipractic.agenda.rest.services.UserService;
 import com.fiipractic.agenda.rest.storage.UserDao;
 
@@ -30,6 +31,11 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public User createUser(User user) {
+        UserRole ur = new UserRole();
+        ur.setRole("ROLE_USER");
+        ur.setUser(user);
+        user.getUserRoles().add(ur);
+        
         userDao.add(user);
         return user;
     }

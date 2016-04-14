@@ -1,5 +1,6 @@
 package com.fiipractic.agenda.rest.models;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -31,6 +32,19 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private Set<Contact> contacts;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = { CascadeType.PERSIST,
+            CascadeType.REMOVE })
+    private Set<UserRole> userRoles = new HashSet<>();
+
+    public Set<UserRole> getUserRoles() {
+        return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
+    }
 
     public Long getId() {
         return id;
