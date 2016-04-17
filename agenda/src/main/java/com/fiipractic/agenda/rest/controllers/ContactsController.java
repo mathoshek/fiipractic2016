@@ -1,6 +1,7 @@
 package com.fiipractic.agenda.rest.controllers;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostAuthorize;
@@ -19,8 +20,9 @@ public class ContactsController {
 
     @RequestMapping(method = RequestMethod.GET)
     @PreAuthorize("authentication.name == #username")
-    public List<Contact> getContacts(@PathVariable String username) {
-        return contactService.getContactsForUsername(username);
+    public List<Contact> getContacts(@PathVariable String username,
+            @RequestParam(required = false) Map<String, String> q) {
+        return contactService.getContactsForUsername(username, q);
     }
 
     @RequestMapping(method = RequestMethod.GET, path = "/{contactId}")

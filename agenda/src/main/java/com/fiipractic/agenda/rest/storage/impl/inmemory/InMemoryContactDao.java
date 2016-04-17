@@ -72,4 +72,12 @@ public class InMemoryContactDao implements ContactDao {
         contacts.get(contact.getUser().getUsername()).remove(contact.getId());
     }
 
+    @Override
+    public List<Contact> getForUsernameFiltered(String username,
+            Map<String, String> q) {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+
 }

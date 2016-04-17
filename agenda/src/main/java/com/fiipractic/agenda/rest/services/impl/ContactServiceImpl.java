@@ -1,6 +1,7 @@
 package com.fiipractic.agenda.rest.services.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.transaction.Transactional;
 
@@ -23,8 +24,10 @@ public class ContactServiceImpl implements ContactService {
     private UserDao userDao;
 
     @Override
-    public List<Contact> getContactsForUsername(String username) {
-        return contactDao.getForUsername(username);
+    public List<Contact> getContactsForUsername(String username, Map<String,String> q) {
+        if(q == null)
+            return contactDao.getForUsername(username);
+        return contactDao.getForUsernameFiltered(username, q);
     }
 
     @Override
